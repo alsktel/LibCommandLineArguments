@@ -67,6 +67,12 @@ typedef struct cmdargs
 */
 const cmdargs_t* const libcmdargs_parse(int argc, const char** const argv);
 
+/**
+ * @brief Free memory allocated for options and parameters representations
+ * @param cmdargs Pointer to command line options and parameters structure
+*/
+void libcmdargs_free(const cmdargs_t* const cmdargs);
+
 
 #ifdef __cplusplus
     }
