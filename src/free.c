@@ -67,7 +67,7 @@ void free_params(cmdparam_t* params, size_t count)
  * @brief Free memory allocated for options and parameters representations
  * @param cmdargs Pointer to command line options and parameters structure
 */
-void libcmdargs_free(const cmdargs_t* const cmdargs)
+void libcmdargs_free(cmdargs_t* cmdargs)
 {
     if(cmdargs)
     {
