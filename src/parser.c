@@ -76,7 +76,7 @@ cmdargs_t* pack_args(cmdopt_t* opts, size_t options_count, cmdparam_t* params, s
 int parse_option(size_t argc, const char** const argv, size_t i, cmdopt_t** opts, size_t* options_count)
 {
     cmdopt_t* new_options = malloc(++*options_count * sizeof(cmdopt_t));
-    new_options[*options_count - 1].option = malloc(strlen(argv[i]));
+    new_options[*options_count - 1].option = malloc(strlen(argv[i]) + 1);
     strcpy(new_options[*options_count - 1].option, argv[i]);
 
     for(size_t idx = 0; idx < *options_count - 1; idx++)
@@ -89,7 +89,7 @@ int parse_option(size_t argc, const char** const argv, size_t i, cmdopt_t** opts
 
     if(i + 1 < argc && !is_option(argv[i + 1]))
     {
-        (*opts)[*options_count - 1].parameter = malloc(strlen(argv[i + 1]));
+        (*opts)[*options_count - 1].parameter = malloc(strlen(argv[i + 1]) + 1);
         strcpy((*opts)[*options_count - 1].parameter, argv[i + 1]);
 
         return true;
