@@ -4,5 +4,8 @@
 # Binaries
 **/bin/*
 
+# Objects
+**/build/*
+
 # Tests
 **/test/*
