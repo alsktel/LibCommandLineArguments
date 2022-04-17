@@ -100,6 +100,37 @@ int libcmdargs_isopt(const cmdargs_t* const args, const char* const opt);
 */
 int libcmdargs_isparam(const cmdargs_t* const args, const char* const param);
 
+/**
+ * @brief Get command line option's parameter
+ * @param args Command line arguments respresentation structure
+ * @param opt Option to get argument from
+ * @return Option's parameter or @c NULL if no parameter or option present
+*/
+const char* const libcmdargs_getoptparam(const cmdargs_t* const args, const char* const opt);
+
+/**
+ * @brief Make options strings unified (delete unnecessary dashes)
+ * @param string String to process
+ * @return String without unnecessary dashes
+*/
+const char* const __libcmdargs_strunify(const char* string);
+
+/**
+ * @brief Check wether options are equals
+ * @param cmdopt Command line option representation structure
+ * @param opt String contains option
+ * @return @c true if options are equal and @c false if not
+*/
+int __libcmdargs_is_opts_equal(const cmdopt_t* const cmdopt, const char* const opt);
+
+/**
+ * @brief Check wether parameters are equals
+ * @param cmdopt Command line parameter representation structure
+ * @param opt String contains parameter
+ * @return @c true if parameters are equal and @c false if not
+*/
+int __libcmdargs_is_params_equal(const cmdparam_t* const cmdparam, const char* const param);
+
 
 #ifdef __cplusplus
     }

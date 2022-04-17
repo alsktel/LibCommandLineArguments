@@ -19,7 +19,12 @@
 #define OPTION_FLAG     '-'
 
 
-const char* const _strunify(const char* string)
+/**
+ * @brief Make options strings unified (delete unnecessary dashes)
+ * @param string String to process
+ * @return String without unnecessary dashes
+*/
+const char* const __libcmdargs_strunify(const char* string)
 {
     for(size_t i = 0; i < strlen(string);)
     {
@@ -36,12 +41,24 @@ const char* const _strunify(const char* string)
     return string;
 }
 
-int is_opts_equal(const cmdopt_t* const cmdopt, const char* const opt)
+/**
+ * @brief Check wether options are equals
+ * @param cmdopt Command line option representation structure
+ * @param opt String contains option
+ * @return @c true if options are equal and @c false if not
+*/
+int __libcmdargs_is_opts_equal(const cmdopt_t* const cmdopt, const char* const opt)
 {
-    return !strcmp(_strunify(cmdopt->option), _strunify(opt));
+    return !strcmp(__libcmdargs_strunify(cmdopt->option), __libcmdargs_strunify(opt));
 }
 
-int is_params_equal(const cmdparam_t* const cmdparam, const char* const param)
+/**
+ * @brief Check wether parameters are equals
+ * @param cmdopt Command line parameter representation structure
+ * @param opt String contains parameter
+ * @return @c true if parameters are equal and @c false if not
+*/
+int __libcmdargs_is_params_equal(const cmdparam_t* const cmdparam, const char* const param)
 {
     return !strcmp(cmdparam->parameter, param);
 }
@@ -61,7 +78,7 @@ int libcmdargs_isopt(const cmdargs_t* const args, const char* const opt)
 
     for(size_t i = 0; i < args->options_count; i++)
     {
-        if(is_opts_equal(&(args->options[i]), opt))
+        if(__libcmdargs_is_opts_equal(&(args->options[i]), opt))
         {
             return LIBCMDARGS_PRESENT;
         }
@@ -85,7 +102,7 @@ int libcmdargs_isparam(const cmdargs_t* const args, const char* const param)
 
     for(size_t i = 0; i < args->parameters_count; i++)
     {
-        if(is_params_equal(&(args->parameters[i]), param))
+        if(__libcmdargs_is_params_equal(&(args->parameters[i]), param))
         {
             return LIBCMDARGS_PRESENT;
         }
