@@ -31,6 +31,17 @@ namespace LibCmdArgs {
 
 
 /**
+ * @brief Constants for flags and return values
+*/
+enum libcmdargs_consts
+{
+    LIBCMDARGS_ERROR = -1,                      /* Operation returned error */
+    LIBCMDARGS_NOT_PRESENT,                     /* No suitable values found */
+    LIBCMDARGS_PRESENT                          /* Suitable value is present */
+};
+
+
+/**
  * @brief Command line option representation structure
 */
 typedef struct cmdopt
@@ -72,6 +83,22 @@ const cmdargs_t* const libcmdargs_parse(int argc, const char** const argv);
  * @param cmdargs Pointer to command line options and parameters structure
 */
 void libcmdargs_free(const cmdargs_t* const cmdargs);
+
+/**
+ * @brief Resolves if command line option is present in arguments
+ * @param args Command line arguments representation structure
+ * @param opt Option to search for
+ * @return @c 1 if option is present, @c 0 if not present and @c -1 on error
+*/
+int libcmdargs_isopt(const cmdargs_t* const args, const char* const opt);
+
+/**
+ * @brief Resolves if command line parameter is present in arguments
+ * @param args Command line arguments representation structure
+ * @param param Command line paramerter to search for
+ * @return @c 1 if parameter is present, @c 0 if not present and @c -1 on error
+*/
+int libcmdargs_isparam(const cmdargs_t* const args, const char* const param);
 
 
 #ifdef __cplusplus
