@@ -30,7 +30,7 @@ const char* const __libcmdargs_strunify(const char* string)
     {
         if(string[i] == OPTION_FLAG)
         {
-            strcpy((char*)string, (string + 1));
+            string++;
         }
         else
         {
