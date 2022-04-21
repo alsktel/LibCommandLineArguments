@@ -34,6 +34,9 @@ ACTIVE_CFLAGS =
 LDFLAGS = -shared -Wall -Werror
 
 
+SHELL := /usr/bin/bash
+
+
 .ONESHELL:
 
 
@@ -73,8 +76,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@if [ $$? == 0 ]; then \
 	printf "%16s\033[0;32m%s\033[0m%s\n" "[" "OK" "]"; \
 	else \
-	printf "%16s\033[0;32m%s\033[0m%s\n" "[" "FAIL" "]"; \
-	cat $(BINDIR)/cc.log; \
+	printf "%16s\033[0;31m%s\033[0m%s\n" "[" "FAIL" "]"; \
+	cat $(OBJDIR)/cc.log; \
 	fi
 
 clean:
