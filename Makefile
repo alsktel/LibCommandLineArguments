@@ -16,6 +16,7 @@ SRCDIR = $(CWD)/src
 INCLUDEDIR = $(CWD)/include
 OBJDIR = $(CWD)/build
 BINDIR = $(CWD)/bin
+ARCHIVEDIR = $(CWD)/archive/libcmdargs
 
 INSTALL_INCLUDEDIR = /usr/include/libcmdargs
 INSTALL_LIBDIR = /usr/lib/libcmdargs
@@ -25,6 +26,8 @@ OBJECTS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SOURCES))
 
 LIBFILE = $(BINDIR)/libcmdargs.so
 INSTALL_LIBFILE = $(INSTALL_LIBDIR)/libcmdargs.so
+
+ARCHIVEFILENAME = libcmdargs
 
 CC = gcc
 CFLAGS = -Wall -Werror -fPIC -I $(INCLUDEDIR) -c
@@ -83,6 +86,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 clean:
 	@rm -f $(OBJDIR)/*
 	@rm -f $(BINDIR)/*
+	@rm -f $(ARCHIVEDIR)/*
 
 install:
 	@if [ ! -f $(LIBFILE) ]; then \
@@ -103,5 +107,18 @@ uninstall:
 	fi
 	@echo -e "\nUninstallation\033[1m finished\033[0m!\n"
 
+archive:
+	@if [ ! -f $(LIBFILE) ]; then \
+	echo -e "\nNo library! Please run\033[1m\033[3m make\033[0m first!\n"; \
+	exit; \
+	fi
+	@if [ ! -d $(ARCHIVEDIR) ]; then mkdir -p $(ARCHIVEDIR); fi
+	@echo ""
+	@read -p "Enter version: "
+	@tar -C $(CWD) -cjf $(ARCHIVEDIR)/$(ARCHIVEFILENAME)-$$REPLY.tar ./bin
+	@echo "Archive $(ARCHIVEFILENAME)-$$REPLY.tar created!"
+	@echo ""
+
 
 .PHONY: all debug release release_prep prep debug_prep clean install uninstall
+.PHONY: archive
